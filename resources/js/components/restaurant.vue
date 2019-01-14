@@ -13,12 +13,18 @@
 				    <button class="btn btn-warning">Editar Restaurant</button>
 				    <button class="btn btn-danger" v-on:click.prevent="deleteRestaurant(restaurant)">Eliminar Restaurant</button>
 
-					<div :id='"demo" + restaurant.id ' class="collapse">
-					Lorem ipsum dolor text....
+          </div>
+					<div :id='"demo" + restaurant.id ' class="collapse" >
+					<div v-for="user in users" >
+            <ul>
+              <li>
+                {{user.email}}
+              </li>
+            </ul>
+          </div>
 					</div>
-  				</div>
-			</div>
-		</div>
+      </div>
+    </div>
 	
 		</div>
 </template>
@@ -27,10 +33,12 @@
   export default {
   	created(){
   		this.getRestaurants();
+      this.getUser();
   	},
   	data (){
   		return {
   			restaurants: [],
+        users: []
   			
   		}
   	},
@@ -41,13 +49,20 @@
   				this.restaurants = response.data
   			})
   		},
-  		deleteRestaurant($restaurant){
-  			alert($restaurant.id)
-  			var url = 'api/restaurants/' + $restaurant.id
+      getUser(){
+        var urlrUsers = 'api/users'
+        axios.get(urlrUsers).then(response => {
+          this.users = response.data
+        })
+      },
+  		deleteRestaurant(restaurant){
+  			var url = 'api/restaurants/' + restaurant.id
   			axios.delete(url).then(response => {
   				this.getRestaurants();
 
-  			})
+  			}).catch(error => {
+          console.log(error.response)
+        })
   		},
   	}
   }

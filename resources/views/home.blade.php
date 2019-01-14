@@ -10,6 +10,7 @@
                 <div class="col-sm-5">
                     
                     <form enctype="multipart/form-data" method="post" action="api/restaurants">
+                         {{ csrf_field() }}
                       <div class="form-group">
                             <label for="">nombre:</label>
                             <input class="form-control" type="text" name="nombre">
@@ -20,6 +21,8 @@
                       </div>
                     </form>
                 </div>
+                    
+
 
                     <restaurant></restaurant>
             </div>

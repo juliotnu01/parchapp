@@ -17,3 +17,4 @@ use Illuminate\Http\Request;
 //     return $request->user();
 // });
 Route::apiResource('restaurants', 'RestaurantController');
+Route::apiResource('users', 'UserController');
