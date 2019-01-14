@@ -19,13 +19,12 @@ class RestaurantController extends Controller
     public function index()
     {
         $usrs = User::all();
-        $usuario = '';
         foreach ($usrs as  $usr) {
            $usuario  = $usr->id;
         }
         $rest = restaurant::all()->where('user_id', $usuario);
-
         return $rest;
+
     }
 
     /**
@@ -89,7 +88,8 @@ class RestaurantController extends Controller
      */
     public function destroy(restaurant $restaurant)
     {
-          $res = restaurant::firstOrFail($restaurant)->delete();
-
+          
+        $restaurant = restaurant::findOrFail($restaurant)->destroy();
+        return $restaurant;
     }
 }

@@ -16,9 +16,10 @@ class UserController extends Controller
     {
         $rests = restaurant::all();
         foreach ($rests as  $rest) {
-            $rest->id
-        }
-        $usr = User::all()
+             $asd =  $rest->user_id;
+        };
+        $usr = User::all()->where('id', $asd);
+        return $usr;
     }
 
     /**

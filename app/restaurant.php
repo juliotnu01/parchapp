@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class restaurant extends Model
 {
      protected $fillabel = [
-    	'id', 'user_id', 'nombre', 'descripcion', 'imagenRuta'
+    	 'descripcion', 'imagenRuta', 'user_id' ,'nombre'
 
     ];
 

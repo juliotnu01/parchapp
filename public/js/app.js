@@ -1788,13 +1788,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     this.getRestaurants();
+    this.getUser();
   },
   data: function data() {
     return {
-      restaurants: []
+      restaurants: [],
+      users: []
     };
   },
   methods: {
@@ -1806,13 +1814,22 @@ __webpack_require__.r(__webpack_exports__);
         _this.restaurants = response.data;
       });
     },
-    deleteRestaurant: function deleteRestaurant($restaurant) {
+    getUser: function getUser() {
       var _this2 = this;
 
-      alert($restaurant.id);
-      var url = 'api/restaurants/' + $restaurant.id;
+      var urlrUsers = 'api/users';
+      axios.get(urlrUsers).then(function (response) {
+        _this2.users = response.data;
+      });
+    },
+    deleteRestaurant: function deleteRestaurant(restaurant) {
+      var _this3 = this;
+
+      var url = 'api/restaurants/' + restaurant.id;
       axios.delete(url).then(function (response) {
-        _this2.getRestaurants();
+        _this3.getRestaurants();
+      }).catch(function (error) {
+        console.log(error.response);
       });
     }
   }
@@ -37366,17 +37383,30 @@ var render = function() {
                   }
                 },
                 [_vm._v("Eliminar Restaurant")]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "collapse",
-                  attrs: { id: "demo" + restaurant.id }
-                },
-                [_vm._v("\n\t\t\t\t\tLorem ipsum dolor text....\n\t\t\t\t\t")]
               )
-            ])
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "collapse",
+                attrs: { id: "demo" + restaurant.id }
+              },
+              _vm._l(_vm.users, function(user) {
+                return _c("div", [
+                  _c("ul", [
+                    _c("li", [
+                      _vm._v(
+                        "\n                " +
+                          _vm._s(user.email) +
+                          "\n              "
+                      )
+                    ])
+                  ])
+                ])
+              }),
+              0
+            )
           ]
         )
       }),
